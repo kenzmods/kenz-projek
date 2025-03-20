@@ -1,2 +1,2 @@
 global.creator = "kenzcyah"
-global.apikey = ["kenzsalto", "kenzzcyah", "Petra2008"]
+global.apikey = ["kenzmeweing", "kenzzcyahanjai", "Petra2008"]
