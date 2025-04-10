@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilih Metode Pembayaran</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f9fafb, #eef2f6);
+  padding: 40px 20px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.header img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.header img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2d3748;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+  z-index: 0;
+  opacity: 0.8;
+  animation: glow 6s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.4;
+  }
+}
+
+.payment-list {
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.payment-item {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #ffffff, #f9fafb);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.payment-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+}
+
+.payment-item:hover::before {
+  left: 100%;
+}
+
+.payment-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  margin-right: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+  z-index: -1;
+  opacity: 0.8;
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.payment-item:hover .icon {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ovo { background: linear-gradient(135deg, #4E2E7F, #6A4D9C); }
+.dana { background: linear-gradient(135deg, #1687FC, #2B9AF3); }
+.gopay { background: linear-gradient(135deg, #00A896, #00BFA5); }
+.shopeepay { background: linear-gradient(135deg, #F63, #FF5722); }
+
+.qris-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.qris-img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.qris-img:hover::before {
+  opacity: 1;
+}
+
+.qris-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wallet-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2d3748;
+  transition: color 0.3s ease;
+}
+
+.payment-item:hover .wallet-name {
+  color: #1a202c;
+}
+
+.number {
+  font-family: monospace;
+  font-size: 0.95rem;
+  background-color: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  color: #4a5568;
+}
+
+.number:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.02);
+  color: #1a202c;
+}
+
+.qris-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+  text-align: right;
+  transition: color 0.3s ease;
+}
+
+.payment-item:hover .qris-note {
+  color: #4a5568;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a202c, #2d3748);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.modal-content img:hover {
+  transform: scale(1.02);
+}
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="https://files.catbox.moe/u63z2s.jpg" alt="Logo Toko">
+    <h1>Payment Metode</h1>
+  </div>
+
+  <div class="payment-list">
+    <div class="payment-item">
+      <div class="icon ovo"><i class="fas fa-wallet"></i></div>
+      <div class="info">
+        <span class="wallet-name">OVO</span>
+        <span class="number" onclick="copyToClipboard('085812345678')">085812345678</span>
+      </div>
+    </div>
+
+    <div class="payment-item">
+      <div class="icon dana"><i class="fas fa-money-bill-wave"></i></div>
+      <div class="info">
+        <span class="wallet-name">DANA</span>
+        <span class="number" onclick="copyToClipboard('081234567890')">081234567890</span>
+      </div>
+    </div>
+
+    <div class="payment-item">
+      <div class="icon gopay"><i class="fas fa-mobile-alt"></i></div>
+      <div class="info">
+        <span class="wallet-name">GoPay</span>
+        <span class="number" onclick="copyToClipboard('089876543210')">089876543210</span>
+      </div>
+    </div>
+
+    <div class="payment-item">
+      <div class="icon shopeepay"><i class="fas fa-shopping-bag"></i></div>
+      <div class="info">
+        <span class="wallet-name">ShopeePay</span>
+        <span class="number" onclick="copyToClipboard('087700112233')">087700112233</span>
+      </div>
+    </div>
+
+    <div class="payment-item">
+      <div class="icon"><i class="fas fa-qrcode"></i></div>
+      <div class="info">
+        <div style="display: flex; flex-direction: column;">
+          <span class="wallet-name">QRIS</span>
+          <span class="qris-note">Klik gambar untuk memperbesar</span>
+        </div>
+        <span class="number" style="background: none; cursor: default;">
+          <img class="qris-img" src="https://files.catbox.moe/91mclu.jpg" alt="QRIS" onclick="showModal()">
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div id="qrisModal" class="modal" onclick="hideModal()">
+    <div class="modal-content">
+      <img src="https://files.catbox.moe/91mclu.jpg" alt="QRIS Besar">
+    </div>
+  </div>
+
+  <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`Nomor disalin: ${text}`);
+      });
+    }
+
+    function showModal() {
+      document.getElementById('qrisModal').style.display = 'flex';
+    }
+
+    function hideModal() {
+      document.getElementById('qrisModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
